@@ -17,7 +17,9 @@ class TestArgs(unittest.TestCase):
     @mock.patch("builtins.print")
     @mock.patch("fleet.parser.Car.load_file")
     @mock.patch("argparse.ArgumentParser.parse_args",
-                return_value=argparse.Namespace(type="count", brand="TESLA", dealership=None, mileage=None))
+                return_value=argparse.Namespace(
+                    type="count", brand="TESLA", dealership=None, mileage=None, path="file.csv"
+                ))
     def test_count_brand(self, mock_args, mock_df, mock_print):
         mock_df.return_value = pandas.DataFrame(self.data)
         main()
@@ -26,8 +28,10 @@ class TestArgs(unittest.TestCase):
     @mock.patch("builtins.print")
     @mock.patch("fleet.parser.Car.load_file")
     @mock.patch("argparse.ArgumentParser.parse_args",
-                return_value=argparse.Namespace(type="count", brand=None, dealership="A", mileage=None))
-    def test_brand(self, mock_args, mock_df, mock_print):
+                return_value=argparse.Namespace(
+                    type="sum", brand=None, dealership="A", mileage=None, path="file.csv"
+                ))
+    def test_sum_dealership(self, mock_args, mock_df, mock_print):
         mock_df.return_value = pandas.DataFrame(self.data)
         main()
         mock_print.assert_called_with(115000)

@@ -6,7 +6,9 @@ A Command Line Interface (CLI) made with Python.
 
 #### FAQ
 **What are the requirements?**
-* Python 3.8, once this project was developed and tested only with this version yet.
+
+This project was developed and tested in the following requirements:
+* Python 3.8
 * Pandas 1.2.3
 
 **Why Python?**
@@ -17,8 +19,14 @@ Python fulfills all the requirements for this project: has a built-in module to 
 
 Pandas is a very used open source lib in Data Science field. In this scenario, Pandas allows writing powerful and maintainable code in few lines - avoiding many for loops, for example. Pandas is also very efficient with small data (usually from 100MB up to 1GB) and performance is rarely a concern.
 
+**How to work in a production environment?**
+
+Once this package is published, it can be downloaded with:
+> pip install git+ssh://git@github.com/07carvalho/python-cli-filter#egg=fleet
+
 
 ## Installation
+This project can be installed via PIP as said above, or download this repo and run:
 > python setup.py install
 
 
@@ -53,31 +61,34 @@ sum [options]
     sum items values according to the options in the CLI
 
 -b, --brand=BRAND
-    get the number of cars by brand
+    compute data by the car's brand
 
 -d, --dealership=DEALERSHIP
-    get the number of cars by brand
+    compute data by the dealership's name
 
 -m, --mileage=MILEAGE
-    get the number of cars by brand
+    compute data by the indicated mileage
+
+-p, --path=PATH
+    the path to the file to be read
 ```
 
 #### EXAMPLES
 Examples of commands related to brands
 ```
-fleet count --brand SomeBrand
-fleet list --brand SomeBrand
+fleet count --brand SomeBrand --path some/path
+fleet list --brand SomeBrand --path some/path
 ```
 
 Examples of commands related to dealership
 ```
-fleet count --dealership SomeDealership
-fleet list --brand SomeBrand
+fleet count --dealership SomeDealership --path some/path
+fleet list --brand SomeBrand --path some/path
 ```
 
 Examples of commands related to mileage
 ```
-fleet list --mileage minValue maxValue
+fleet list --mileage minValue maxValue --path some/path
 ```
 
 

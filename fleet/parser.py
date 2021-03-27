@@ -2,14 +2,16 @@ import pandas
 
 
 class Car:
-    file_path = "data/backend_file-calculation_dealership.csv"
-
-    def __init__(self):
+    def __init__(self, file_path: str):
+        self.file_path = file_path
         self.df = self.load_file()
         self.df.columns = ["BRANDS", "DEALERSHIPS", "KMs", "PRICES"]
 
     def load_file(self):
-        return pandas.read_csv(self.file_path, header=None)
+        try:
+            return pandas.read_csv(self.file_path, header=None)
+        except FileNotFoundError:
+            raise SystemExit("[ERROR] File does not exist. Try again.")
 
     def count(self, column: str, query: str) -> int:
         """count number of occurrences in a column"""
