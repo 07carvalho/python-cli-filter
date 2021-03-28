@@ -1,7 +1,7 @@
 import setuptools
 setuptools.setup(
     name="fleet",
-    version="1.0",
+    version="1.0.0",
     author="Felipe Carvalho",
     description="Fleet reads data from a file to return a computed feedback",
     packages=setuptools.find_packages(),

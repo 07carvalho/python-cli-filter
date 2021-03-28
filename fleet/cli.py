@@ -1,53 +1,58 @@
 import argparse
-from fleet.parser import Car
+from fleet.interfaces import CarInterface
 
 
 def controller(args):
-    if args.type is not None and args.type in ["count", "list", "report", "sum"]:
+    if args.type is not None and args.type in ["count", "list", "price", "report"]:
         if not args.path.endswith(".csv"):
             raise SystemExit("[ERROR] File should be a .csv")
-        car = Car(args.path)
-        if args.type == "count" and args.brand:
-            print(car.count("BRANDS", args.brand))
-        elif args.brand and args.type == "list":
-            print(car.filter("BRANDS", args.brand))
-        elif args.mileage and args.type == "list":
-            print(car.filter_in_range("KMs", args.mileage))
-        elif args.dealership and args.type == "sum":
-            print(car.filter_and_sum("DEALERSHIPS", "PRICES", args.dealership))
+
+        car = CarInterface(args.path)
+
+        if args.type == "count":
+            print(car.count(args.kind, args.value))
+        elif args.type == "list":
+            value = args.value if args.value else args.range
+            print(car.filter(args.kind, value))
+        elif args.type == "price":
+            value = args.value if args.value else args.range
+            print(car.sum_prices(args.kind, value))
+        elif args.type == "report":
+            value = args.value if args.value else args.range
+            print(car.report(args.kind, value))
         else:
             print("error: invalid option\ntry \"fleet --help\" for more information.")
     else:
-        print("error: type should be \"count\", \"list\", \"report\" or \"sum\"\ntry \"fleet --help\" for more information.")
+        print("error: type should be \"count\", \"list\", \"price\" or \"report\"\ntry \"fleet --help\" for more information.")
 
 
 def main():
     parser = argparse.ArgumentParser(
         description="Reads data from a file to return a computed feedback.",
     )
-    parser.version = "1.0"
+    parser.version = "1.0.0"
     parser.add_argument(
-        "-b",
-        "--brand",
+        "-k",
+        "--kind",
         action="store",
         type=str,
-        help="car's brand"
+        help="the kind of data (brand, dealership, mileage or price)"
     )
     parser.add_argument(
-        "-m",
-        "--mileage",
+        "-v",
+        "--value",
+        action="store",
+        type=str,
+        help="value"
+    )
+    parser.add_argument(
+        "-R",
+        "--range",
         action="store",
         type=int,
         nargs=2,
         metavar=("min", "max"),
-        help="mileage range",
-    )
-    parser.add_argument(
-        "-d",
-        "--dealership",
-        action="store",
-        type=str,
-        help="dealership's name"
+        help="mileage scope (min and max)",
     )
     parser.add_argument(
         "-p",
@@ -61,10 +66,10 @@ def main():
         "type",
         action="store",
         type=str,
-        help="count (return quantity), list (shows a list), sum (total values), and report (shows a list and quantity of elements)",
+        help="count (return quantity), list (shows a list), price (sum car price), and report (shows a list and quantity of elements)",
     )
     parser.add_argument(
-        "-v",
+        "-V",
         "--version",
         action="version"
     )
