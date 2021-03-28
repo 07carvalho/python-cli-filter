@@ -7,9 +7,10 @@ A Command Line Interface (CLI) made with Python.
 #### FAQ
 **What are the requirements?**
 
-This project was developed and tested in the following requirements:
+This project was developed and tested in a Linux environment in the following requirements:
 * Python 3.8
 * Pandas 1.2.3
+* PIP
 
 **Why Python?**
 
@@ -19,13 +20,27 @@ Python fulfills all the requirements for this project: has a built-in module to 
 
 Pandas is a very used open source lib in Data Science field. In this scenario, Pandas allows writing powerful and maintainable code in few lines - avoiding many for loops, for example. Pandas is also very efficient with small data (usually from 100MB up to 1GB) and performance is rarely a concern.
 
-**It is very flexible, right?**
+**What are the main features?**
 
-Yes! It is possible to apply commands to all file columns and extract valuable data. The initial scope of the project was expanded to enable new functionality. 
+For each column (called here as kind), it is possible to:
+* Count rows based in a filtered element;
+* Count rows based in a range of filtered elements;
+* List rows bases in a filtered element;
+* List rows bases in a range of filtered elements;
+* Get a report with list and count based in a filtered element;
+* Get a report with list and count based in a range of filtered elements;
+* Get the total value (price) of cars based in a filtered element;
+* Get the total value (price) of cars based in a range of filtered elements;
+
+Check the command section to learn more.
+
+**So it is very flexible, right?**
+
+Yes! It is possible to apply commands to all columns and extract valuable data. The initial scope of the project was expanded to enable new functionality.
 
 **How to work in a production environment?**
 
-Once this package is published, it can be downloaded with:
+Once this package is published, it can be downloaded running:
 > pip install git+ssh://git@github.com/07carvalho/python-cli-filter#egg=fleet
 
 
@@ -74,7 +89,7 @@ report [options]
     the value used to query the file
 
 -R, --range <min, max>
-    a range of minimum and maximum values to query the file
+    a range of minimum and maximum values to query the file (both should be number)
 
 -p, --path <path>
     the path to the file to be read
