@@ -21,7 +21,7 @@ Pandas is a very used open source lib in Data Science field. In this scenario, P
 
 **It is very flexible, right?**
 
-Yes! It is possible to apply commands to all file columns and extract valuable data. 
+Yes! It is possible to apply commands to all file columns and extract valuable data. The initial scope of the project was expanded to enable new functionality. 
 
 **How to work in a production environment?**
 
@@ -30,8 +30,8 @@ Once this package is published, it can be downloaded with:
 
 
 ## Installation
-This project can be installed via PIP as said above, or downloading this repo and running:
-> python setup.py install
+This project can be installed via PIP as said above, or downloading this repo and running (maybe need to use `sudo`):
+> python3 setup.py install
 
 
 ## Documentation

@@ -20,6 +20,7 @@ class Car:
 
     def filter(self, column: str, query: str):
         """list according to query"""
+        query = int(query) if query.isnumeric() else query
         try:
             return self.df[(self.df[column] == query)]
         except KeyError:
@@ -27,7 +28,10 @@ class Car:
 
     def filter_in_range(self, column: str, query_range):
         """list according to range"""
-        return self.df[(self.df[column] >= query_range[0]) & (self.df[column] <= query_range[1])]
+        try:
+            return self.df[(self.df[column] >= query_range[0]) & (self.df[column] <= query_range[1])]
+        except KeyError:
+            raise SystemExit(f"[ERROR] Kind \"{column}\" does not exist. Fix and try again.")
 
     def sum_prices(self, dataframe: DataFrame) -> int:
         """get the total value of cars that exist in a given dataframe"""

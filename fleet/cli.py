@@ -9,21 +9,21 @@ def controller(args):
 
         car = CarInterface(args.path)
 
-        if args.type == "count":
+        if args.type == "count" and args.value:
             print(car.count(args.kind, args.value))
-        elif args.type == "list":
+        elif args.type == "list" and (args.value or args.range):
             value = args.value if args.value else args.range
             print(car.filter(args.kind, value))
-        elif args.type == "price":
+        elif args.type == "price" and (args.value or args.range):
             value = args.value if args.value else args.range
             print(car.sum_prices(args.kind, value))
-        elif args.type == "report":
+        elif args.type == "report" and (args.value or args.range):
             value = args.value if args.value else args.range
             print(car.report(args.kind, value))
         else:
-            print("error: invalid option\ntry \"fleet --help\" for more information.")
+            print("[ERROR] Invalid options\nTry \"fleet --help\" for more information.")
     else:
-        print("error: type should be \"count\", \"list\", \"price\" or \"report\"\ntry \"fleet --help\" for more information.")
+        print("[ERROR] Type should be \"count\", \"list\", \"price\" or \"report\"\nTry \"fleet --help\" for more information.")
 
 
 def main():
@@ -43,7 +43,7 @@ def main():
         "--value",
         action="store",
         type=str,
-        help="value"
+        help="the value itself"
     )
     parser.add_argument(
         "-R",
@@ -52,7 +52,7 @@ def main():
         type=int,
         nargs=2,
         metavar=("min", "max"),
-        help="mileage scope (min and max)",
+        help="a range of values (min and max, both numbers)",
     )
     parser.add_argument(
         "-p",
@@ -66,7 +66,7 @@ def main():
         "type",
         action="store",
         type=str,
-        help="count (return quantity), list (shows a list), price (sum car price), and report (shows a list and quantity of elements)",
+        help="count (return quantity), list (shows a list), price (sum car price), or report (shows a list and quantity of elements)",
     )
     parser.add_argument(
         "-V",
