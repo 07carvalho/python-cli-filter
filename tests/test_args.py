@@ -134,9 +134,9 @@ class TestArgs(unittest.TestCase):
                 ))
     def test_report_missing_number_in_range(self, mock_args, mock_df, mock_print):
         mock_df.return_value = pandas.DataFrame(self.data)
-        with self.assertRaises(ValueError) as context:
+        with self.assertRaises(SystemExit) as context:
             main()
-            mock_print.assert_called_with("[ERROR] In a range, both values should be a number.")
+            mock_print.assert_called_with("[ERROR] Pass two numbers as ranger parameter.")
 
     @mock.patch("builtins.print")
     @mock.patch("fleet.parser.Car.load_file")

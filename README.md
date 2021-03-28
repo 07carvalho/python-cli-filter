@@ -10,7 +10,7 @@ A Command Line Interface (CLI) made with Python.
 This project was developed and tested in a Linux environment in the following requirements:
 * Python 3.8
 * Pandas 1.2.3
-* PIP
+* pip3
 
 **Why Python?**
 
@@ -41,12 +41,12 @@ Yes! It is possible to apply commands to all columns and extract valuable data. 
 **How to work in a production environment?**
 
 Once this package is published, it can be downloaded running:
-> pip install git+ssh://git@github.com/07carvalho/python-cli-filter#egg=fleet
+> pip3 install git+ssh://git@github.com/07carvalho/python-cli-filter#egg=fleet
 
 
 ## Installation
 This project can be installed via PIP as said above, or downloading this repo and running (maybe need to use `sudo`):
-> python3 setup.py install
+> python3.8 setup.py install
 
 
 ## Documentation
@@ -130,4 +130,4 @@ fleet report --kind price -R 43000 45000 --path file.csv
 
 
 ## Tests
-> python3 -m unittest
+> python3.8 -m unittest

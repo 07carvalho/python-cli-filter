@@ -40,13 +40,15 @@ class CarInterface:
         return "No item found"
 
     def valid_range(self, value):
-        if len(value) == 2:
+        if type(value) == list:
             try:
                 min_value = int(value[0])
                 max_value = int(value[1])
                 if min_value > max_value:
                     raise SystemExit("[ERROR] In a range, the first value should be lower or equal the second.")
                 return True
+            except IndexError:
+                raise SystemExit("[ERROR] Pass two numbers as ranger parameter.")
             except ValueError:
                 raise SystemExit("[ERROR] In a range, both values should be a number.")
         return False
